@@ -62,7 +62,7 @@ const Room = {
     let formattedConditions = conditions.join(' && ')
     const query =
         "SELECT rm.room_num, rm.clean, rm.occupied, rm.active, rt.type, rr.checked_in, rr.checked_out, rr.room_id, " +
-        "CASE WHEN rr.check_out_date=CURDATE() THEN ('Due Out') END AS departure, " +
+        "CASE WHEN rr.check_out_date=CURDATE() && rr.checked_out=0 THEN ('Due Out') END AS dueout, " +
         "CASE WHEN rr.check_in_date<CURDATE() && rr.check_out_date>CURDATE() THEN ('Stay Over') END AS stayover " +
         "FROM rooms AS rm " +
         "INNER JOIN room_types AS rt ON rm.room_type_id=rt.room_type_id " +

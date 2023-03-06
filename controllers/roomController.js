@@ -8,7 +8,7 @@ module.exports = {
   },
   createNewRoom: (req, res) => {
     room.insertOne(req.body.vals, result => {
-      res.json({id: result.insertId})
+      res.json({ id: result.insertId })
     })
   },
   getRoomById: (req, res) => {
@@ -41,7 +41,7 @@ module.exports = {
     })
   },
   getHouseKeepingStatus: (req, res) => {
-    const {dirty, dueOut, occupied, notReserved, vacant, arrived, departed, stayOver, clean} = req.params;
+    const { dirty, dueOut, occupied, notReserved, vacant, arrived, departed, stayOver, clean } = req.params;
     const conditions = []
     let c1
     if (clean === 'true' && dirty === 'false') {
@@ -56,8 +56,8 @@ module.exports = {
     if (vacant === 'true' && occupied === 'false') {
       c3 = 'rm.occupied=0'
     } else if (
-        vacant === 'false' &&
-        occupied === 'true'
+      vacant === 'false' &&
+      occupied === 'true'
     ) {
       c3 = 'rm.occupied=1'
     } else {
@@ -65,19 +65,14 @@ module.exports = {
     }
     conditions.push(c3)
     const criteria4 = []
-    arrived === 'true' &&
-    criteria4.push(
-        '(checked_in=1 && check_in_date=CURDATE() && checked_out=0)'
+    arrived === 'true' && criteria4.push(
+      '(checked_in=1 && check_in_date=CURDATE() && checked_out=0)'
     )
-    departed === 'true' &&
-    criteria4.push('check_out_date=CURDATE() && checked_out=1')
-    stayOver === 'true' &&
-    criteria4.push('(CURDATE()>check_in_date && CURDATE()<check_out_date)')
-    dueOut === 'true' &&
-    criteria4.push('(check_out_date=CURDATE() && checked_out=0)')
-    notReserved === 'true' &&
-    criteria4.push(
-        '(check_in_date IS NULL || (CURDATE() NOT BETWEEN check_in_date AND check_out_date))'
+    departed === 'true' && criteria4.push('check_out_date<=CURDATE() && checked_out=1')
+    stayOver === 'true' && criteria4.push('(CURDATE()>check_in_date && CURDATE()<check_out_date)')
+    dueOut === 'true' && criteria4.push('(check_out_date=CURDATE() && checked_out=0)')
+    notReserved === 'true' && criteria4.push(
+      '(check_in_date IS NULL || (CURDATE() NOT BETWEEN check_in_date AND check_out_date))'
     )
     if (criteria4.length > 0) {
       const c4 = '(' + criteria4.join(' || ') + ')'

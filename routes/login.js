@@ -6,7 +6,19 @@ router.route('/').post(passport.authenticate('local'), (req, res) => {
 })
 
 router.route('/status').get((req, res) => {
-  res.status(200).json(req.isAuthenticated())
+  if (req.isAuthenticated()) {
+    res.status(200).json({ user: req.user, isAuthenticated: req.isAuthenticated() })
+  } else {
+    res.status(200).json({
+      user: {
+        access_id: 0,
+        type: 'Guest',
+        user_id: 0,
+        username: 'guest'
+      },
+      isAuthenticated: req.isAuthenticated()
+    })
+  }
 })
 
 module.exports = router

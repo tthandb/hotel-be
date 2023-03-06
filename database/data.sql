@@ -40,11 +40,11 @@ INSERT INTO hotel_info (hotel_info_id, hotel_name, address, city, country, email
 (1, 'Regal Inn & Suites', '389 Truong Dinh, Hai Ba Trung', 'Ha Noi', 'Vietnam', 'info@regalinn.com', '216-555-1212', 1);
 
 TRUNCATE TABLE invoices;
-INSERT INTO invoices (invoice_id, res_room_id, num_days, rate, room_service_charges, payment_type, created_at) VALUES
-(1, 1101, 6, '2000000', '0.00', 'Cash', '2023-02-15 17:18:53'),
-(2, 1101, 6, '2000000', '0.00', 'Cash', '2023-02-15 17:19:07'),
-(3, 1101, 6, '2000000', '0.00', 'Cash', '2023-02-15 17:19:15'),
-(4, 1002, 4, '3000000', '0.00', 'Cash', '2023-02-28 21:57:20');
+INSERT INTO invoices (invoice_id, res_room_id, num_days, rate, payment_type, created_at) VALUES
+(1, 1101, 6, '2000000', 'Cash', '2023-02-15 17:18:53'),
+(2, 1101, 6, '2000000', 'Cash', '2023-02-15 17:19:07'),
+(3, 1101, 6, '2000000', 'Cash', '2023-02-15 17:19:15'),
+(4, 1002, 4, '3000000', 'Cash', '2023-02-28 21:57:20');
 
 TRUNCATE TABLE reservations;
 INSERT INTO reservations (reservation_id, customer_id, user_id, comments) VALUES
@@ -75,10 +75,10 @@ INSERT INTO reservations (reservation_id, customer_id, user_id, comments) VALUES
 
 TRUNCATE TABLE res_rooms;
 INSERT INTO res_rooms (res_room_id, reservation_id, room_type_id, check_in_date, check_out_date, checked_in, checked_out, adults, room_id, rate, comments, active) VALUES
-(1001, 1001, 1, DATE_SUB(CURDATE(), INTERVAL 3 DAY), DATE_ADD(CURDATE(), INTERVAL 1 DAY), 1, 0, 1, 9, 2000000, 'needs a late checkout time', 1),
+(1001, 1001, 1, DATE_SUB(CURDATE(), INTERVAL 3 DAY), CURDATE(), 1, 0, 1, 9, 2000000, 'Muốn checkout muộn', 1),
 (1002, 1002, 2, DATE_SUB(CURDATE(), INTERVAL 3 DAY), DATE_ADD(CURDATE(), INTERVAL 1 DAY), 1, 1, 2, 4, 3000000, '', 1),
 (1003, 1003, 1, DATE_SUB(CURDATE(), INTERVAL 3 DAY), DATE_ADD(CURDATE(), INTERVAL 1 DAY), 1, 0, 2, 11, 2000000, '', 1),
-(1004, 1004, 2, DATE_SUB(CURDATE(), INTERVAL 3 DAY), DATE_ADD(CURDATE(), INTERVAL 2 DAY), 1, 0, 1, 12, 3000000, 'wants a good view', 1),
+(1004, 1004, 2, DATE_SUB(CURDATE(), INTERVAL 3 DAY), DATE_ADD(CURDATE(), INTERVAL 2 DAY), 1, 0, 1, 12, 3000000, 'Muốn view đẹp', 1),
 (1005, 1005, 1, DATE_SUB(CURDATE(), INTERVAL 3 DAY), DATE_ADD(CURDATE(), INTERVAL 2 DAY), 1, 0, 2, 13, 2000000, '', 1),
 (1006, 1006, 3, DATE_SUB(CURDATE(), INTERVAL 3 DAY), DATE_ADD(CURDATE(), INTERVAL 3 DAY), 1, 0, 1, 6, 5000000, '', 1),
 (1007, 1007, 1, DATE_SUB(CURDATE(), INTERVAL 2 DAY), DATE_ADD(CURDATE(), INTERVAL 1 DAY), 1, 0, 2, 23, 2000000, '', 1),
@@ -91,10 +91,10 @@ INSERT INTO res_rooms (res_room_id, reservation_id, room_type_id, check_in_date,
 (1014, 1014, 2, DATE_SUB(CURDATE(), INTERVAL 2 DAY), DATE_ADD(CURDATE(), INTERVAL 2 DAY), 1, 0, 1, 32, 3000000, '', 1),
 (1015, 1015, 1, DATE_SUB(CURDATE(), INTERVAL 2 DAY), DATE_ADD(CURDATE(), INTERVAL 1 DAY), 1, 0, 3, 31, 2000000, '', 1),
 (1016, 1016, 3, DATE_SUB(CURDATE(), INTERVAL 1 DAY), DATE_ADD(CURDATE(), INTERVAL 3 DAY), 1, 0, 1, 50, 5000000, '', 1),
-(1017, 1017, 1, DATE_SUB(CURDATE(), INTERVAL 1 DAY), DATE_ADD(CURDATE(), INTERVAL 2 DAY), 1, 0, 2, 63, 2000000, 'needs a late checkout time', 1),
+(1017, 1017, 1, DATE_SUB(CURDATE(), INTERVAL 1 DAY), DATE_ADD(CURDATE(), INTERVAL 2 DAY), 1, 0, 2, 63, 2000000, '', 1),
 (1018, 1018, 3, DATE_SUB(CURDATE(), INTERVAL 1 DAY), DATE_ADD(CURDATE(), INTERVAL 1 DAY), 1, 0, 2, 56, 5000000, '', 1),
 (1019, 1019, 1, DATE_SUB(CURDATE(), INTERVAL 1 DAY), DATE_ADD(CURDATE(), INTERVAL 2 DAY), 1, 0, 1, 65, 2000000, '', 1),
-(1020, 1020, 3, DATE_SUB(CURDATE(), INTERVAL 1 DAY), DATE_ADD(CURDATE(), INTERVAL 1 DAY), 1, 0, 3, 58, 5000000, 'wants a good view', 1),
+(1020, 1020, 3, DATE_SUB(CURDATE(), INTERVAL 1 DAY), DATE_ADD(CURDATE(), INTERVAL 1 DAY), 1, 0, 3, 58, 5000000, 'Muốn view đẹp', 1),
 (1021, 1021, 1, DATE_SUB(CURDATE(), INTERVAL 1 DAY), DATE_ADD(CURDATE(), INTERVAL 2 DAY), 1, 0, 1, 67, 2000000, '', 1),
 (1022, 1022, 2, DATE_SUB(CURDATE(), INTERVAL 1 DAY), DATE_ADD(CURDATE(), INTERVAL 4 DAY), 1, 0, 2, 62, 3000000, '', 1),
 (1023, 1023, 1, DATE_SUB(CURDATE(), INTERVAL 1 DAY), DATE_ADD(CURDATE(), INTERVAL 6 DAY), 1, 0, 2, 69, 2000000, '', 1),

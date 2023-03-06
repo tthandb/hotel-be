@@ -8,7 +8,29 @@ const options = {
   database: process.env.DB_NAME, // Database name:
   multipleStatements: true
 }
-const connection = mysql.createConnection(options)
-connection.connect()
+// const connection = mysql.createConnection(options)
+// connection.connect()
+let connection = mysql.createConnection(options);
 
+function handleDisconnect() {
+  // connection = mysql.createConnection(options);
+
+  connection.connect(function (err) {
+    if (err) {
+      console.log("error when connecting to db:", err);
+      setTimeout(handleDisconnect, 2000);
+    } else {
+      console.log("connection is successfull");
+    }
+  });
+  connection.on("error", function (err) {
+    console.log("db error", err);
+    if (err.code === "PROTOCOL_CONNECTION_LOST") {
+      handleDisconnect();
+    } else {
+      throw err;
+    }
+  });
+}
+handleDisconnect();
 module.exports = connection

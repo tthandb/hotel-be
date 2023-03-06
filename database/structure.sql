@@ -33,8 +33,7 @@ CREATE TABLE invoices (
   invoice_id int(10) NOT NULL,
   res_room_id int(10) NOT NULL,
   num_days int(3) NOT NULL,
-  rate decimal(5,2) NOT NULL,
-  room_service_charges decimal(5,2) DEFAULT 0.00,
+  rate mediumint(9) NOT NULL,
   payment_type varchar(50) NOT NULL,
   created_at datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
